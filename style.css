@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,700;1,400&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1.2rem;
+    background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
+}
+h1{
+    text-align: center;
+}
+
+.games-container{
+    max-width: 680px;
+    margin: 3rem auto;
+}
+.game-container{
+    display: grid;
+    grid-template-columns: 1fr 9fr 1fr;
+    column-gap: 1rem;
+    align-items: center;
+}
+.status{
+    font-size: 1rem;
+}
+.game{
+    margin: 2rem 0;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(102, 102, 102, 0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 1rem;
+    background-color: #fff;
+}
+.game .teams > div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem 0;
+}
+.teams small{
+    font-size: 0.8rem;
+    font-style: italic;
+}
+.game img{
+    max-width: 2rem;
+    margin-bottom: -5px;
+}
+.game button{
+    padding: 0.5rem 1rem;
+    margin: 1rem 0 0 1rem;
+    font-family: inherit;
+    font-size: 1.2rem;
+    background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.game button:hover{
+    filter: brightness(0.9);
+}
