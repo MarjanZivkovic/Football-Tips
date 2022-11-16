@@ -26,6 +26,7 @@ fetch(`https://v3.football.api-sports.io/fixtures?date=${year}-${month}-${day}`,
 				<div> <div><img src='${ el.teams.away.logo}'> ${el.teams.away.name} </div><div> <strong> ${el.goals.away === null ? '-' : el.goals.away}</strong> </div></div>
 			</div>
 			<button onclick='suggestTip(${el.teams.home.id}, ${el.teams.away.id})'>Our Tip</button>
+			<div class='tip'></div>
 		</div>			
 		`;
 	gamesContainer.appendChild(game);
@@ -35,7 +36,7 @@ fetch(`https://v3.football.api-sports.io/fixtures?date=${year}-${month}-${day}`,
 });
 
 //head to head tips
-function suggestTip( home, away ){
+function suggestTip(e, home, away ){
 	const scoreArr = [];
 	const goalArr = [];
 
@@ -65,6 +66,24 @@ function suggestTip( home, away ){
 	.catch(err => {
 		console.log(err);
 	});
+	
+	console.log(scoreArr)
 
-	console.log(scoreArr, goalArr)
+	if ( scoreArr.filter( x => x === '1').length > 5 ){
+		console.log('1')
+	} else if ( scoreArr.filter( x => x === '2').length > 5 ){
+		console.log('2')
+	} else if ( scoreArr.filter( x => x === 'x').length > 5 ){
+		console.log('x')
+	} else {
+		console.log('-')
+	}
+
+	if ( goalArr.filter( x => x === '3+').length > 6 ){
+		console.log('3+')
+	} else if ( goalArr.filter( x => x === '0-2').length > 6 ){
+		console.log('0-2')
+	} else {
+		console.log('-')
+	}
 }
