@@ -13,6 +13,13 @@ h1{
     text-align: center;
 }
 
+.tips{
+    text-align: center;
+    position: fixed;
+    top: 15%;
+    right: 10%;
+}
+
 .games-container{
     max-width: 680px;
     margin: 3rem auto;

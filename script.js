@@ -1,9 +1,12 @@
 const gamesContainer = document.querySelector('.games-container');
+const scoreSpan = document.querySelector('.score-tip');
+const goalSpan = document.querySelector('.goal-tip');
 
 const date = new Date();
 const day = date.getDate();
 const month = date.getMonth() + 1;
 const year = date.getFullYear();
+
 
 //fetching todays fixtures
 fetch(`https://v3.football.api-sports.io/fixtures?date=${year}-${month}-${day}`, {
@@ -25,8 +28,7 @@ fetch(`https://v3.football.api-sports.io/fixtures?date=${year}-${month}-${day}`,
 				<div> <div> <img src='${ el.teams.home.logo}'> ${el.teams.home.name} </div><div> <strong> ${el.goals.home === null ? '-' : el.goals.home}</strong></div></div> 
 				<div> <div><img src='${ el.teams.away.logo}'> ${el.teams.away.name} </div><div> <strong> ${el.goals.away === null ? '-' : el.goals.away}</strong> </div></div>
 			</div>
-			<button onclick='suggestTip(${el.teams.home.id}, ${el.teams.away.id})'>Our Tip</button>
-			<div class='tip'></div>
+			<button onclick='getTip(${el.teams.home.id}, ${el.teams.away.id})'>Our Tip</button>
 		</div>			
 		`;
 	gamesContainer.appendChild(game);
@@ -34,11 +36,13 @@ fetch(`https://v3.football.api-sports.io/fixtures?date=${year}-${month}-${day}`,
 .catch(err => {
 	console.log(err);
 });
-
+		
 //head to head tips
-function suggestTip(e, home, away ){
+function getTip( home, away ){
 	const scoreArr = [];
 	const goalArr = [];
+	let scoreTip;
+	let goalTip;
 
 	fetch(`https://v3.football.api-sports.io/fixtures/headtohead?h2h=${home}-${away}&last=10`, {
 	"method": "GET",
@@ -62,28 +66,31 @@ function suggestTip(e, home, away ){
 		} else if( match.teams.home.winner === null || match.teams.away.winner === null){
 			scoreArr.push('x');
 		}
-	}))
+		}))
+	.then( () =>{
+		console.log(scoreArr, goalArr)
+	
+		if ( (scoreArr.filter( x => x === '1').length) > ( (scoreArr.filter( x => x === 'x').length) + (scoreArr.filter( x => x === '2').length) ) ){
+			scoreTip = '1';
+		} else if ( (scoreArr.filter( x => x === '2').length) > ( (scoreArr.filter( x => x === 'x').length) + (scoreArr.filter( x => x === '1').length) ) ){
+			scoreTip = '2';
+		} else if ( (scoreArr.filter( x => x === 'x').length) > ( (scoreArr.filter( x => x === '1').length) + (scoreArr.filter( x => x === '2').length) ) ){
+			scoreTip = 'X';
+		} else {
+			scoreTip = '-';
+		}
+	
+		if ( goalArr.filter( x => x === '3+').length > 5 ){
+			goalTip = '3+';
+		} else if ( goalArr.filter( x => x === '0-2').length > 5){
+			goalTip = '0-2';
+		} else {
+			goalTip = '-';
+		}
+		scoreSpan.textContent = scoreTip;
+		goalSpan.textContent = goalTip;
+	})		
 	.catch(err => {
 		console.log(err);
-	});
-	
-	console.log(scoreArr)
-
-	if ( scoreArr.filter( x => x === '1').length > 5 ){
-		console.log('1')
-	} else if ( scoreArr.filter( x => x === '2').length > 5 ){
-		console.log('2')
-	} else if ( scoreArr.filter( x => x === 'x').length > 5 ){
-		console.log('x')
-	} else {
-		console.log('-')
-	}
-
-	if ( goalArr.filter( x => x === '3+').length > 6 ){
-		console.log('3+')
-	} else if ( goalArr.filter( x => x === '0-2').length > 6 ){
-		console.log('0-2')
-	} else {
-		console.log('-')
-	}
+	})
 }
