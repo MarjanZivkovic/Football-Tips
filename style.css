@@ -68,3 +68,17 @@ h1{
 .game button:hover{
     filter: brightness(0.9);
 }
+/* Legend */
+.game.legend{
+    max-width: 680px;
+    margin: 3rem auto;
+}
+.legend h3{
+ text-align: center;
+}
+.legend{
+    font-size: 1rem;
+}
+.legend ul{
+    list-style: none;
+}

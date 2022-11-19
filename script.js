@@ -69,16 +69,21 @@ function getTip( home, away ){
 		}))
 	.then( () =>{
 		console.log(scoreArr, goalArr)
-	
-		if ( (scoreArr.filter( x => x === '1').length) > ( (scoreArr.filter( x => x === 'x').length) + (scoreArr.filter( x => x === '2').length) ) ){
-			scoreTip = '1';
-		} else if ( (scoreArr.filter( x => x === '2').length) > ( (scoreArr.filter( x => x === 'x').length) + (scoreArr.filter( x => x === '1').length) ) ){
-			scoreTip = '2';
-		} else if ( (scoreArr.filter( x => x === 'x').length) > ( (scoreArr.filter( x => x === '1').length) + (scoreArr.filter( x => x === '2').length) ) ){
-			scoreTip = 'X';
+		
+		if( scoreArr.length >= 5 ){
+			if ( (scoreArr.filter( x => x === '1').length) > ( (scoreArr.filter( x => x === 'x').length) + (scoreArr.filter( x => x === '2').length) ) ){
+				scoreTip = '1';
+			} else if ( (scoreArr.filter( x => x === '2').length) > ( (scoreArr.filter( x => x === 'x').length) + (scoreArr.filter( x => x === '1').length) ) ){
+				scoreTip = '2';
+			} else if ( (scoreArr.filter( x => x === 'x').length) > ( (scoreArr.filter( x => x === '1').length) + (scoreArr.filter( x => x === '2').length) ) ){
+				scoreTip = 'X';
+			} else {
+				scoreTip = '-';
+			}
 		} else {
 			scoreTip = '-';
 		}
+
 	
 		if ( goalArr.filter( x => x === '3+').length > 5 ){
 			goalTip = '3+';
