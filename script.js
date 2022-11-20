@@ -1,3 +1,4 @@
+const searchGames = document.querySelector('.search-games');
 const gamesContainer = document.querySelector('.games-container');
 const scoreSpan = document.querySelector('.score-tip');
 const goalSpan = document.querySelector('.goal-tip');
@@ -7,9 +8,14 @@ const day = date.getDate();
 const month = date.getMonth() + 1;
 const year = date.getFullYear();
 
+//set current year, footer
+document.querySelector('.current-year').textContent = year;
 
 //fetching todays fixtures
-fetch(`https://v3.football.api-sports.io/fixtures?date=${year}-${month}-${day}`, {
+fetch(
+	//  https://v3.football.api-sports.io/fixtures?live="1-2-3-39-40-45-61-78-88-94-106-110-135-140-144-179-197-203-207-210-218-238-244-271-283-286-315-323-332-333-345-373-407"&last=1`, 
+	`https://v3.football.api-sports.io/fixtures?date=${year}-${month}-${day}`, 
+{
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "v3.football.api-sports.io",
@@ -24,7 +30,7 @@ fetch(`https://v3.football.api-sports.io/fixtures?date=${year}-${month}-${day}`,
 		<div class='game-container'>
 			<div class='status'>${el.fixture.status.short}</div>
 			<div class='teams'>
-				<div><small>${el.league.name}, ${el.league.country}</small></div>
+				<div class='league'><small>${el.league.name}, ${el.league.country}</small></div>
 				<div> <div> <img src='${ el.teams.home.logo}'> ${el.teams.home.name} </div><div> <strong> ${el.goals.home === null ? '-' : el.goals.home}</strong></div></div> 
 				<div> <div><img src='${ el.teams.away.logo}'> ${el.teams.away.name} </div><div> <strong> ${el.goals.away === null ? '-' : el.goals.away}</strong> </div></div>
 			</div>
@@ -32,7 +38,22 @@ fetch(`https://v3.football.api-sports.io/fixtures?date=${year}-${month}-${day}`,
 		</div>			
 		`;
 	gamesContainer.appendChild(game);
-}))
+})).then( () =>{
+	//filter leagues
+	const leagues = document.querySelectorAll('.league');
+
+	function filterLeagues( searchedLeague ){
+		leagues.forEach( league => {
+			if( league.textContent.toLowerCase().includes( searchedLeague.toLowerCase() ) ){
+				league.parentNode.parentNode.parentNode.classList.remove('none');
+			} else {
+				league.parentNode.parentNode.parentNode.classList.add('none');
+			}
+		} )
+	}
+
+	searchGames.addEventListener('input', (e) => filterLeagues(e.target.value));
+})
 .catch(err => {
 	console.log(err);
 });

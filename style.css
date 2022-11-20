@@ -12,14 +12,41 @@ body{
 h1{
     text-align: center;
 }
-
+.none{
+    display: none;
+}
+/* Search */
+.search-games{
+    display: block;
+    width: 30%;
+    margin: 0 auto;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    border: 0;
+    font-size: 1rem;
+}
+.search-games:focus{
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+/* Tips */
 .tips{
     text-align: center;
     position: fixed;
     top: 15%;
     right: 10%;
 }
-
+.score-tip,.goal-tip{
+    display: inline-block;
+    background-color: #fff;
+    padding: 1rem;
+    margin: 0.25rem 0;
+    width: 3.5rem;
+    border-radius: 1rem;
+    font-size: 1rem;
+    text-align: center;
+}
+/* Games */
 .games-container{
     max-width: 680px;
     margin: 3rem auto;
@@ -81,4 +108,20 @@ h1{
 }
 .legend ul{
     list-style: none;
+}
+/* Footer */
+footer{
+    padding: 3rem 1rem;
+}
+footer p{
+    text-align: center;
+    font-size: 1rem;
+    margin: 0.5rem 1rem;
+}
+footer p a{
+    color: inherit;
+}
+footer p a:hover{
+    text-decoration: none;
+    color: #3c1e69;
 }
