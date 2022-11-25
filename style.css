@@ -15,36 +15,56 @@ h1{
 .none{
     display: none;
 }
-/* Search */
-.search-games{
+/* Instruction and search */
+.search-games, .instruction{
     display: block;
     width: 30%;
     margin: 0 auto;
     padding: 0.75rem 1rem;
     border-radius: 10px;
     border: 1px solid rgba(102, 102, 102, 0.5);
+    font-family: inherit;
     font-size: 1rem;
+}
+.instruction{
+    position: absolute;
+    width: auto;
+    margin: 0 2rem;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 0 rgba(102, 102, 102, 0.5);
+    cursor: pointer;
+}
+.instruction:hover{
+    filter: brightness(0.8);
+}
+.instruction:active{
+    transform: translateY(2px);
+    box-shadow: 0 0 0 transparent;
 }
 .search-games:focus{
     outline: none;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 /* Tips */
-.tips{
+.tips-container{
     text-align: center;
     position: fixed;
     top: 15%;
     right: 10%;
 }
+.tips-flex{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .score-tip,.goal-tip{
     display: inline-block;
     background-color: #fff;
-    padding: 1rem;
+    padding: 1rem 2rem;
     margin: 0.25rem 0;
-    width: 3.5rem;
     border: 1px solid rgba(102, 102, 102, 0.5);
     border-radius: 10px;
-    font-size: 1rem;
     text-align: center;
 }
 .score-tip.calculating, .goal-tip.calculating{
@@ -179,4 +199,25 @@ footer p a{
 footer p a:hover{
     text-decoration: none;
     color: #3c1e69;
+}
+
+/* responsive design */
+
+@media (max-width: 1220px){
+    .tips-container{
+        position: sticky;
+        top: 0;
+        background-color: #fff;
+    }
+    .tips-container h3{
+        margin: 1rem 0 0;
+        padding-bottom: 1rem;
+    }
+    .tips-flex{
+        flex-direction: row;
+        gap: 2rem;
+    }
+    .score-tip,.goal-tip{
+        padding: 0.5rem 1.5rem;
+    }
 }
