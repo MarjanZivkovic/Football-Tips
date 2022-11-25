@@ -22,7 +22,7 @@ h1{
     margin: 0 auto;
     padding: 0.75rem 1rem;
     border-radius: 10px;
-    border: 0;
+    border: 1px solid rgba(102, 102, 102, 0.5);
     font-size: 1rem;
 }
 .search-games:focus{
@@ -42,10 +42,59 @@ h1{
     padding: 1rem;
     margin: 0.25rem 0;
     width: 3.5rem;
-    border-radius: 1rem;
+    border: 1px solid rgba(102, 102, 102, 0.5);
+    border-radius: 10px;
     font-size: 1rem;
     text-align: center;
 }
+.score-tip.calculating, .goal-tip.calculating{
+    background-color: rgba(102, 102, 102, 0.5);
+}
+/* Loader */
+.loader-container{
+    display: flex;
+    justify-content: center;
+    min-height: 80vh;
+    overflow: hidden;
+}
+.loader-container.none{
+    display: none;
+}
+.loader, .loader:before, .loader:after {
+    border-radius: 50%;
+    width: 2.5em;
+    height: 2.5em;
+    animation-fill-mode: both;
+    animation: bblFadInOut 1.8s infinite ease-in-out;
+  }
+  .loader {
+    color: #000;
+    margin: auto;
+    font-size: 7px;
+    position: relative;
+    text-indent: -9999em;
+    transform: translateZ(0);
+    animation-delay: -0.16s;
+  }
+  .loader:before,
+  .loader:after {
+    content: '';
+    position: absolute;
+    top: 0;
+  }
+  .loader:before {
+    left: -3.5em;
+    animation-delay: -0.32s;
+  }
+  .loader:after {
+    left: 3.5em;
+  }
+  
+  @keyframes bblFadInOut {
+    0%, 80%, 100% { box-shadow: 0 2.5em 0 -1.3em }
+    40% { box-shadow: 0 2.5em 0 0 }
+  }
+      
 /* Games */
 .games-container{
     max-width: 680px;
@@ -73,6 +122,12 @@ h1{
     justify-content: space-between;
     align-items: center;
     margin: 0.5rem 0;
+}
+#league{
+    display: block;
+}
+#league img{
+    max-width: 1.2rem;
 }
 .teams small{
     font-size: 0.8rem;
