@@ -72,6 +72,8 @@ function fetchFixtures(){
 	})
 	.catch(err => {
 		console.log(err);
+		loaded();
+		gamesContainer.innerHTML = '<h2 style="text-align: center; margin: 5rem auto"> Ooops! Looks like we hit our daily limit <br> Try again tomorrow. </h2>';
 	});
 }
 

@@ -8,9 +8,13 @@ body{
     font-family: 'Ubuntu', sans-serif;
     font-size: 1.2rem;
     background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
+    overflow-x: hidden;
 }
 h1{
     text-align: center;
+}
+ul{
+    list-style: none;
 }
 .none{
     display: none;
@@ -44,6 +48,43 @@ h1{
 .search-games:focus{
     outline: none;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Instruction page */
+.instruction-page{
+    background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-height: 100vh;
+    width: 100%;
+    z-index: 5;
+}
+.instruction-page .game{
+    max-width: 680px;
+    margin: 3rem auto;
+    height: 80vh;
+    overflow-y: auto;
+}
+.instruction-page .instruction{
+    margin-top: 6rem;
+}
+.instruction-page h3{
+    font-style: italic;
+    font-size: 1.2rem;
+    border-bottom: 1px solid rgba(102, 102, 102, 0.5);
+}
+.instruction-page h4{
+    margin: 2rem 0 -0.5rem;
+    color: rgba(102, 102, 102, 0.8);
+}
+.instruction-page span{
+    color: rgba(102, 102, 102, 0.8);
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+.instruction-page span.red{
+    color: rgb(199, 76, 76);
 }
 /* Tips */
 .tips-container{
@@ -181,9 +222,6 @@ h1{
 .legend{
     font-size: 1rem;
 }
-.legend ul{
-    list-style: none;
-}
 /* Footer */
 footer{
     padding: 3rem 1rem;
@@ -206,8 +244,15 @@ footer p a:hover{
 @media (max-width: 1220px){
     .tips-container{
         position: sticky;
-        top: 0;
+        top: -10px;
+        right: auto;
         background-color: #fff;
+        border: 1px solid rgba(102, 102, 102, 0.5);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        border-radius: 1rem;
+        max-width: 680px;
+        margin: 3rem auto;
+        padding:  0.5rem 1rem;
     }
     .tips-container h3{
         margin: 1rem 0 0;
@@ -217,7 +262,54 @@ footer p a:hover{
         flex-direction: row;
         gap: 2rem;
     }
-    .score-tip,.goal-tip{
-        padding: 0.5rem 1.5rem;
+}
+
+@media (max-width: 800px){
+    .search-games, .instruction{
+        width: 70%;
+        max-width: 680px;
+    }
+    .instruction{
+        width: auto;
+        position: relative;
+        margin: 2rem auto;
+    }
+}
+
+@media (max-width: 500px){
+    html{
+        font-size: 14px;
+    }
+    .search-games{
+        width: 100%;
+    }
+    .instruction-page .instruction{
+        margin-top: 2rem;
+    }
+    .tips-container h3{
+        margin: 0.5rem 0;
+        padding: 0;
+    }
+    .loader-container{
+        min-height: 30vh;
+    }
+    .score-tip, .goal-tip{
+        padding: 0.5rem 1.75rem;
+    }
+    .game-container{
+        grid-template-columns: 1fr 1fr;
+    }
+    .status{
+        font-weight: bold;
+    }
+    .teams{
+        grid-column: span 2;
+    }
+    .game button{
+        grid-row: 1;
+        grid-column: 2;
+    }
+    .legend ul{
+        padding: 0;
     }
 }
