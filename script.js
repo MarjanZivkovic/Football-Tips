@@ -3,6 +3,11 @@ const loader = document.querySelector('.loader-container');
 const gamesContainer = document.querySelector('.games-container');
 const scoreSpan = document.querySelector('.score-tip');
 const goalSpan = document.querySelector('.goal-tip');
+const instructionPage = document.querySelector('.instruction-page');
+const instructionBtn = document.querySelector('#instruction');
+const backHomeBtn = document.querySelector('#back-home');
+const popUP = document.querySelector('#pop-up');
+
 
 const date = new Date();
 const day = date.getDate();
@@ -21,6 +26,27 @@ function loaded(){
 	loader.classList.add('none');
 	gamesContainer.hidden = false;
 }
+
+// Pop up widnow handler
+function showPopUP(){
+	popUP.style.display = 'flex';
+	popUP.style.opacity = '1';
+}
+
+window.onload = setTimeout( showPopUP, 4000 ); 
+
+popUP.addEventListener('click', () =>{ popUP.remove()});
+
+// Instruction page handler
+instructionBtn.addEventListener('click', () =>{
+	instructionPage.hidden = false;
+	document.body.style.overflow = 'hidden';
+})
+
+backHomeBtn.addEventListener('click', () =>{
+	instructionPage.hidden = true;
+	document.body.style.overflow = 'auto';
+})
 
 //fetching todays fixtures on page loading
 function fetchFixtures(){

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#e9defa">
+    <meta name="theme-color" content="#fbfcdb">
     <link rel="shortcut icon" href="https://www.google.com/s2/u/0/favicons?domain=api-football.com" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <title>Football Tips</title>
@@ -12,14 +12,23 @@
 <body>
     <header>
         <h1>Today's Fixtures:</h1>
-        <button class="instruction">Instructions</button>
+        <button class="instruction" id="instruction">Instructions</button>
         <div>
             <input class="search-games" type="text" placeholder="search by league or country">
         </div>
     </header>
+    <!-- Pop-up window -->
+    <article class="pop-up-container" id="pop-up">
+        <div class="pop-up">
+            <h2>Welcome to Football Tips App!</h2>
+            <p>Every day we work hard to provide you with the best quickest football tips.</p>
+            <p>Make sure to read the instruction page first and then enjoy discovering your tips.</p>
+            <h3>Good luck!</h3>
+        </div>
+    </article>
     <!-- Instruction 'page' -->
     <article class="instruction-page" hidden>
-        <button class="instruction">Back to games</button>
+        <button class="instruction" id="back-home">Back to games</button>
         <div class="game">
                 <div class="english-page">
                     <h3>English</h3>
@@ -41,16 +50,38 @@
                     <p>In both fields, you can get the "<span> - </span>" sign (most often). This means that the app is unable to predict the outcome of the given match. The reason for that can be the lack of previous matches between the two teams or the unpredictability of those matches.</p>
                     <h4>The logic:</h4>
                     <p>The app predicts the outcomes of matches primarily based on previous matches between the teams ( Head to Head ). For serious bets, our advice is to also take into account the current form of teams, positions on the table, number of injured players... Use our tips as an addition to your betting arsenal.</p>
-                    <h4><span class="red">Important:</span></h4>
+                    <h4><span class="red">Important!</span></h4>
                     <p>Even though we did our best to provide you with solid suggestions, our tips can be wrong due to myriad of different factors that can affect a game of football. <span class="red">Therefore, we won't assume any responsibility for the wrong tips!</span></p>
                     <p>We've put a lot of effort to help you bet more efficiently. We'll continue working on improving this app. Let us know if you were successful, nothing makes us happier. <span> Good luck!</span></p>
                 </div>
                 <div class="serbian-page" lang="sr">
                     <h3>Srpski</h3>
+                    <h4>Prikaz:</h4>
+                    <p>Po otvaranju aplikacije na ekranu ćete dobiti sve fudbalske mečeve za tekući dan. Samo utakmice koje još uvek nisu počele ili su u toku će biti izlistane. Možete filtrirati mečeve po ligi ili državi u polju za pretragu.</p>
+                    <p>Klikom na dugme Naši Tipovi (Our Tips), dobićete naše predloge za klađenje za dati meč.</p>
+                    <h4>Mogući ishodi:</h4>
+                    <p>U polju za rezultat ( Score ) možete dobiti sledeće tipove:</p>
+                    <ul>
+                        <li><span>1</span> Domaćin pobeđuje</li>
+                        <li><span>X</span> Nerešen rezultat</li>
+                        <li><span>2</span> Gost pobeđuje</li>
+                    </ul>
+                    <p>U polju za golove ( Goals ) možete dobiti sledeće tipove:</p>
+                    <ul>
+                        <li><span>3+</span> Zbir golova je 3 ili više</li>
+                        <li><span>0-2</span> Zbir golova je 2 ili manje</li>
+                    </ul>
+                    <p>U oba polja možete dobiti "<span> - </span>" znak (najčešće). Ovo znači da aplikacija nije u mogućnosti da predvidi ishod meča. Razlog za to može biti nedovoljno prethodnih susreta između dva tima ili nedovoljna predvidivost tih susreta.</p>
+                    <h4>Logika:</h4>
+                    <p>Aplikacija predviđa ishode mečeva primarno na bazi prethodnih susreta timova ( Head to Head ). Za ozbiljno klađenje, naš savet je da takođe uzmete u obzir trenutnu formu timova, pozicije na tabeli, broj povređenih igrača... Koristite naše tipove kao dodatak Vašem kladioničarskom arsenalu.</p>
+                    <h4><span class="red">Važno!</span></h4>
+                    <p>Iako smo učinili sve da Vam obezbedimo dobre predloge, naši tipovi mogu biti pogrešni usled mnoštva različitih faktora koji mogu uticati na jednu fudbalsku utakmicu.<span class="red"> Stoga, ne preuzimamo nikakvu odgovornost za pogrešne tipove!</span></p>
+                    <p>Uložili smo puno truda da Vam pomognemo u efikasnom klađenju. Nastavićemo da radimo na poboljšanju ove aplikacije. Javite nam ukoliko ste bili uspešni u tipovanju, ništa nas ne čini srećnijim.<span> Srećno!</span></p>
                 </div>
             </div>
         </div>
     </article>
+    <!-- Tips -->
     <aside class="tips-container">
         <div class="tips">
             <h3>Our Tips:</h3>
@@ -67,10 +98,13 @@
     <aside class="ad">
 
     </aside>
+    <!-- Loader -->
     <div class="loader-container">
         <div class="loader"></div>
     </div>
+    <!-- Games Fetched-->
     <main class="games-container"></main>
+    <!-- Legend -->
     <section class="game legend">
         <h3>Legend:</h3>
         <ul>
@@ -95,6 +129,7 @@
             <li><strong>LIVE</strong> - In Progress</li> -->
         </ul>
     </section>
+    <!-- Footer -->
     <footer>
         <p>&copy; <span class="current-year"></span> by <a href="https://marjan-zivkovic.com/" target="_blank">Marjan</a></p>
         <p><small>Powered by <a href="https://www.api-football.com/" target="_blank">API - Football</a></small></p>

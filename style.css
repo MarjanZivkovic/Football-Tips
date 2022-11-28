@@ -3,7 +3,9 @@
 *{
     box-sizing: border-box;
 }
-
+*:focus{
+    outline: none;
+}
 body{
     font-family: 'Ubuntu', sans-serif;
     font-size: 1.2rem;
@@ -19,7 +21,7 @@ ul{
 .none{
     display: none;
 }
-/* Instruction and search */
+/* Instruction button and search field */
 .search-games, .instruction{
     display: block;
     width: 30%;
@@ -49,7 +51,39 @@ ul{
     outline: none;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
-
+/* Pop up window */
+#pop-up{
+    display: none;
+}
+.pop-up-container{
+    opacity: 0;
+    transition: opacity 3s ease-in;
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+.pop-up{
+    max-width: 680px;
+    margin: 2rem 1rem;
+    padding: 4rem 2rem;
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cg fill='%235a4280' fill-opacity='0.09'%3E%3Cpath fill-rule='evenodd' d='M5 3.59L1.46.05.05 1.46 3.59 5 .05 8.54l1.41 1.41L5 6.41l3.54 3.54 1.41-1.41L6.41 5l3.54-3.54L8.54.05 5 3.59zM17 2h24v2H17V2zm0 4h24v2H17V6zM2 17h2v24H2V17zm4 0h2v24H6V17z'/%3E%3C/g%3E%3C/svg%3E");
+    box-shadow: 0 0 12px #5a4280;
+    text-align: center;
+    border: 0.5rem solid;
+    border-image-source: linear-gradient(-20deg, #5a4280 0%, #cace67 100%);
+    border-image-slice: 0.5;
+    border-radius: 1rem;
+}
+.pop-up p{
+    text-align: justify;
+}
 /* Instruction page */
 .instruction-page{
     background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
@@ -72,14 +106,17 @@ ul{
 .instruction-page h3{
     font-style: italic;
     font-size: 1.2rem;
-    border-bottom: 1px solid rgba(102, 102, 102, 0.5);
+    border-bottom: 1px solid rgb(102, 102, 102);
+}
+.instruction-page .serbian-page h3{
+    margin-top: 5rem;
 }
 .instruction-page h4{
     margin: 2rem 0 -0.5rem;
-    color: rgba(102, 102, 102, 0.8);
+    color: rgb(102, 102, 102);
 }
 .instruction-page span{
-    color: rgba(102, 102, 102, 0.8);
+    color: rgb(102, 102, 102);
     font-weight: bold;
     font-size: 1.4rem;
 }
@@ -272,7 +309,13 @@ footer p a:hover{
     .instruction{
         width: auto;
         position: relative;
-        margin: 2rem auto;
+        margin: 0 auto 2rem;
+    }
+    .instruction-page .instruction{
+        margin-top: 2rem;
+    }
+    .instruction-page .game{
+        margin: 1rem;
     }
 }
 
