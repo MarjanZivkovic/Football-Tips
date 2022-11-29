@@ -12,7 +12,7 @@
 <body>
     <header>
         <h1>Today's Fixtures:</h1>
-        <button class="instruction" id="instruction">Instructions</button>
+        <button class="instruction" id="instruction" title="Go to instruction page">Instructions</button>
         <div>
             <input class="search-games" type="text" placeholder="search by league or country">
         </div>
@@ -30,7 +30,7 @@
     <div class="ball"></div>
     <!-- Instruction 'page' -->
     <article class="instruction-page" hidden>
-        <button class="instruction" id="back-home">Back to games</button>
+        <button class="instruction" id="back-home" title="Go to homepage">Back to games</button>
         <div class="game">
                 <div class="english-page">
                     <h3>English</h3>
@@ -132,6 +132,7 @@
             <li><strong>LIVE</strong> - In Progress</li> -->
         </ul>
     </section>
+    <div class="to-top" hidden title="Go to top"><span  class="go-to-top" >➱</span></div>
     <!-- Footer -->
     <footer>
         <p>&copy; <span class="current-year"></span> by <a href="https://marjan-zivkovic.com/" target="_blank">Marjan</a></p>

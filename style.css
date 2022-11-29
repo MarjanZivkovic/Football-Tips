@@ -6,9 +6,14 @@
 *:focus{
     outline: none;
 }
+html{
+    scroll-behavior: smooth;
+}
 body{
     font-family: 'Ubuntu', sans-serif;
     font-size: 1.2rem;
+    max-width: 1980px;
+    margin: 0 auto;
     background: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
     overflow-x: hidden;
 }
@@ -268,8 +273,26 @@ ul{
     bottom: 0;
     width: 18rem;
     height: 25rem;
-    opacity: 0.6;
     z-index: 2;
+}
+/* Go top top */
+.go-to-top{
+    user-select: none;
+    position: fixed;
+    bottom: 5rem;
+    right: calc(50% - 30rem);
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    font-size: 3rem;
+    line-height: 3rem;
+    transform: rotate(-90deg) translate(-50%, -50%);
+    cursor: pointer;
+    z-index: 20;
+}
+.go-to-top:hover{
+    background-color: #000;
+    color: #e9defa;
 }
 /* Footer */
 footer{
@@ -318,6 +341,9 @@ footer p a:hover{
         background: url(./img/ball.svg) no-repeat center bottom / contain;
         background-attachment: fixed;
     }
+    .go-to-top{
+        right: 1rem;
+    }
 }
 
 @media (max-width: 800px){
@@ -335,6 +361,14 @@ footer p a:hover{
     }
     .instruction-page .game{
         margin: 1rem;
+    }
+    .go-to-top{
+        bottom: 2rem;
+        right: calc(50% - 2rem);
+        font-size: 2rem;
+        line-height: 2rem;
+        width: 2rem;
+        height: 2rem;
     }
 }
 

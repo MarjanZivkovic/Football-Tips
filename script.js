@@ -7,6 +7,7 @@ const instructionPage = document.querySelector('.instruction-page');
 const instructionBtn = document.querySelector('#instruction');
 const backHomeBtn = document.querySelector('#back-home');
 const popUP = document.querySelector('#pop-up');
+const goToTop = document.querySelector('.to-top'); 
 
 
 const date = new Date();
@@ -173,3 +174,14 @@ function getTip( home, away ){
 		console.log(err);
 	})
 }
+
+// to top handler
+window.addEventListener('scroll', () => {
+	if ( document.documentElement.scrollTop > 760 ){
+		goToTop.hidden = false;
+	} else {
+		goToTop.hidden = true;
+	}
+});
+
+goToTop.addEventListener('click', () =>{ window.scrollTo(0, 0) });
