@@ -8,6 +8,8 @@ const instructionBtn = document.querySelector('#instruction');
 const backHomeBtn = document.querySelector('#back-home');
 const popUP = document.querySelector('#pop-up');
 const goToTop = document.querySelector('.to-top'); 
+const adContainer = document.querySelector('.ad-container');
+const marjanZivkovicAd = document.querySelector('#marjan-zivkovic a img');
 
 
 const date = new Date();
@@ -100,7 +102,8 @@ function fetchFixtures(){
 	.catch(err => {
 		console.log(err);
 		loaded();
-		gamesContainer.innerHTML = '<h2 style="text-align: center; margin: 5rem auto"> Ooops! Looks like we hit our daily limit <br> Try again tomorrow. </h2>';
+		gamesContainer.innerHTML = '<h2 style="text-align: center; margin: 5rem auto"> Ooops! Looks like we hit our daily limit <br> Try again tomorrow. <br> Sorry! </h2>';
+		adContainer.hidden = true;
 	});
 }
 
@@ -110,8 +113,10 @@ fetchFixtures();
 function getTip( home, away ){
 	const scoreArr = [];
 	const goalArr = [];
+	const ggArr = [];
 	let scoreTip;
 	let goalTip;
+	let ggTip;
 
 	scoreSpan.classList.add('calculating');
 	goalSpan.classList.add('calculating');
@@ -125,24 +130,32 @@ function getTip( home, away ){
 	})
 	.then(response => response.json())
 	.then( data => data.response.forEach( match =>{
-		if ( (match.goals.home + match.goals.away) > 2  ){
-			goalArr.push('3+');
-		} else if ( (match.goals.home + match.goals.away) <= 2 ){
-			goalArr.push('0-2');
+		if( match.teams.home.id === home ){
+			if ( (match.goals.home + match.goals.away) > 2  ){
+				goalArr.push('3+');
+			} else if ( (match.goals.home + match.goals.away) <= 2 ){
+				goalArr.push('0-2');
+			}
+
+			if ( match.teams.home.winner ){
+				scoreArr.push('1');
+			} else if ( match.teams.away.winner ){
+				scoreArr.push('2');
+			} else if( match.teams.home.winner === null || match.teams.away.winner === null){
+				scoreArr.push('x');
+			}
+
+			if ( match.goals.home > 0 && match.goals.away > 0 ){
+				ggArr.push( 'gg' );
+			} else {
+				ggArr.push( 'ngg' );
+			}
 		}
-		
-		if ( match.teams.home.winner ){
-			scoreArr.push('1');
-		} else if ( match.teams.away.winner ){
-			scoreArr.push('2');
-		} else if( match.teams.home.winner === null || match.teams.away.winner === null){
-			scoreArr.push('x');
-		}
-		}))
+	}))		
 	.then( () =>{
-		console.log(scoreArr, goalArr)
+		console.log(scoreArr, goalArr, ggArr)
 		
-		if( scoreArr.length >= 5 ){
+		if( scoreArr.length >= 3 ){
 			if ( ((scoreArr.filter( x => x === '1').length) > ( (scoreArr.filter( x => x === 'x').length) + (scoreArr.filter( x => x === '2').length) )) && (scoreArr.indexOf('1') === 0) ){
 				scoreTip = '1';
 			} else if ( ((scoreArr.filter( x => x === '2').length) > ( (scoreArr.filter( x => x === 'x').length) + (scoreArr.filter( x => x === '1').length) )) && (scoreArr.indexOf('2') === 0) ){
@@ -156,16 +169,30 @@ function getTip( home, away ){
 			scoreTip = '-';
 		}
 
-	
-		if ( (goalArr.filter( x => x === '3+').length > 5) && ( goalArr.indexOf('3+') === 0 ) ){
-			goalTip = '3+';
-		} else if ( (goalArr.filter( x => x === '0-2').length > 5) && ( goalArr.indexOf('0-2') === 0 ) ){
-			goalTip = '0-2';
-		} else {
+		if( goalArr.length >= 3 ){
+			if ( (goalArr.filter( x => x === '3+').length > ( goalArr.length / 2 )) && ( goalArr.indexOf('3+') === 0 ) ){
+				goalTip = '3+';
+			} else if ( (goalArr.filter( x => x === '0-2').length > ( goalArr.length / 2 )) && ( goalArr.indexOf('0-2') === 0 ) ){
+				goalTip = '0-2';
+			} else {
+				goalTip = '-';
+			}
+		} else{
 			goalTip = '-';
 		}
+
+		if( ggArr.length >= 3 ){
+			if( (ggArr.filter( x => x === 'gg' ).length > ggArr.length / 2 ) && ( ggArr.indexOf('gg') === 0 ) ) {
+				ggTip = 'GG';
+			} else {
+				ggTip = '';
+			}
+		} else {
+			ggTip = '';
+		}
+		
 		scoreSpan.textContent = scoreTip;
-		goalSpan.textContent = goalTip;
+		goalSpan.textContent =  ggTip + goalTip;
 
 		scoreSpan.classList.remove('calculating');
 		goalSpan.classList.remove('calculating');
@@ -185,3 +212,20 @@ window.addEventListener('scroll', () => {
 });
 
 goToTop.addEventListener('click', () =>{ window.scrollTo(0, 0) });
+
+//Advertisement handler
+const adArray = [ 'mz1', 'mz2', 'mz3', 'mz4' ];
+let counter = 0;
+
+function startAdBanner (){
+	marjanZivkovicAd.src = `./img/${adArray[counter]}.jpg`;
+	
+	counter ++;
+	if ( counter === adArray.length ){
+		counter = 0;
+	}
+	setTimeout( startAdBanner, 6000 );
+	
+}
+
+startAdBanner();

@@ -197,7 +197,41 @@ ul{
     0%, 80%, 100% { box-shadow: 0 2.5em 0 -1.3em }
     40% { box-shadow: 0 2.5em 0 0 }
   }
-      
+/* Ads */
+.ad-container{
+    position: absolute;
+    margin: 3rem 2rem;
+}
+.ad{
+    max-width: 280px;
+    height: 500px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.ad img{
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+#new-ad{
+    background-color: #010101;
+    max-width: 280px;
+    padding: 1rem;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+#new-ad p{
+    animation: fade-out 6s linear infinite;
+}
+@keyframes fade-out{
+    50%{
+        opacity: 0;
+    }
+}
 /* Games */
 .games-container{
     max-width: 680px;
