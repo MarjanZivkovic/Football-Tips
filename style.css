@@ -204,7 +204,7 @@ ul{
 }
 .ad{
     max-width: 280px;
-    height: 500px;
+    height: 450px;
     border-radius: 10px;
     overflow: hidden;
 }
@@ -215,7 +215,7 @@ ul{
 }
 #new-ad{
     background-color: #010101;
-    max-width: 280px;
+    width: 280px;
     padding: 1rem;
     color: #fff;
     display: flex;
@@ -347,7 +347,7 @@ footer p a:hover{
 
 /* responsive design */
 
-@media (max-width: 1220px){
+@media (max-width: 1320px){
     .tips-container{
         position: sticky;
         top: -10px;
@@ -371,8 +371,20 @@ footer p a:hover{
     .ball{
         display: none;
     }
+    .ad-container{
+        position: static;
+        max-width: 680px;
+        margin: 3rem auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        gap: 2rem;
+    }
+    #new-ad{
+        margin: 0;
+    }
     .games-container{
-        background: url(./img/ball.svg) no-repeat center bottom / contain;
+        background: url(./img/ball.svg) no-repeat 50% bottom / contain;
         background-attachment: fixed;
     }
     .go-to-top{
