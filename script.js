@@ -13,8 +13,8 @@ const marjanZivkovicAd = document.querySelector('#marjan-zivkovic a img');
 
 
 const date = new Date();
-const day = date.getDate();
-const month = date.getMonth() + 1;
+const day = date.getDate() < 10 ? '0'+date.getDate() : date.getDate();
+const month = (date.getMonth() + 1) < 10 ? '0'+(date.getMonth() + 1) : (date.getMonth() + 1) ;
 const year = date.getFullYear();
 
 //set current year, footer
@@ -50,6 +50,16 @@ backHomeBtn.addEventListener('click', () =>{
 	instructionPage.hidden = true;
 	document.body.style.overflow = 'auto';
 })
+
+//CHECKING API STATUS
+// fetch(`https://v3.football.api-sports.io/fixtures?date=${year}-${month}-${day}`,{
+// 	"method": "GET",
+// 	"headers": {
+// 		"x-rapidapi-host": "v3.football.api-sports.io",
+// 		"x-rapidapi-key": "e80663b34efa21c93f4b9507cc1d5aba"
+// 	}
+// }).then(response => response.json())
+// .then(data => console.log(data))
 
 //fetching todays fixtures on page loading
 function fetchFixtures(){
@@ -108,6 +118,7 @@ function fetchFixtures(){
 }
 
 fetchFixtures();
+let fixtureID;
 		
 //head to head tips
 function getTip( home, away ){
@@ -130,6 +141,7 @@ function getTip( home, away ){
 	})
 	.then(response => response.json())
 	.then( data => data.response.forEach( match =>{
+		fixtureID = match.fixture.id
 		if( match.teams.home.id === home ){
 			if ( (match.goals.home + match.goals.away) > 2  ){
 				goalArr.push('3+');
@@ -196,10 +208,23 @@ function getTip( home, away ){
 
 		scoreSpan.classList.remove('calculating');
 		goalSpan.classList.remove('calculating');
-	})		
+	})
+	.then( () =>{ predictionMatch(fixtureID) } )
 	.catch(err => {
 		console.log(err);
 	})
+}
+
+function predictionMatch(id){
+	fetch(`https://v3.football.api-sports.io/predictions?fixture=${id}`, {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "v3.football.api-sports.io",
+		"x-rapidapi-key": "e80663b34efa21c93f4b9507cc1d5aba"
+	}
+	})
+	.then(response => response.json())
+	.then( data => console.log(data.response))
 }
 
 // to top handler
@@ -224,7 +249,7 @@ function startAdBanner (){
 	if ( counter === adArray.length ){
 		counter = 0;
 	}
-	setTimeout( startAdBanner, 6000 );
+	setTimeout( startAdBanner, 5000 );
 	
 }
 

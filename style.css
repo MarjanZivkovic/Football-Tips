@@ -225,7 +225,7 @@ ul{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 #new-ad p{
-    animation: fade-out 6s linear infinite;
+    animation: fade-out 5s linear infinite;
 }
 @keyframes fade-out{
     50%{
@@ -315,18 +315,14 @@ ul{
     position: fixed;
     bottom: 5rem;
     right: calc(50% - 30rem);
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
     font-size: 3rem;
-    line-height: 3rem;
     transform: rotate(-90deg) translate(-50%, -50%);
     cursor: pointer;
     z-index: 20;
 }
 .go-to-top:hover{
-    background-color: #000;
-    color: #e9defa;
+   color: #5a4280;
+   font-weight: bold;
 }
 /* Footer */
 footer{
@@ -412,9 +408,6 @@ footer p a:hover{
         bottom: 2rem;
         right: calc(50% - 2rem);
         font-size: 2rem;
-        line-height: 2rem;
-        width: 2rem;
-        height: 2rem;
     }
 }
 
@@ -423,7 +416,10 @@ footer p a:hover{
         font-size: 14px;
     }
     .search-games{
-        width: 100%;
+        width: calc(100% - 1.5rem);
+    }
+    .tips-container,.games-container,.game.legend{
+        margin: 3rem 0.5rem;
     }
     .instruction-page .instruction{
         margin-top: 2rem;
