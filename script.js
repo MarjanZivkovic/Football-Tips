@@ -3,6 +3,8 @@ const loader = document.querySelector('.loader-container');
 const gamesContainer = document.querySelector('.games-container');
 const scoreSpan = document.querySelector('.score-tip');
 const goalSpan = document.querySelector('.goal-tip');
+const AIButton = document.querySelector('#ai-button');
+const AIAdvice = document.querySelector('.ai-advice');
 const instructionPage = document.querySelector('.instruction-page');
 const instructionBtn = document.querySelector('#instruction');
 const backHomeBtn = document.querySelector('#back-home');
@@ -51,15 +53,6 @@ backHomeBtn.addEventListener('click', () =>{
 	document.body.style.overflow = 'auto';
 })
 
-//CHECKING API STATUS
-// fetch(`https://v3.football.api-sports.io/fixtures?date=${year}-${month}-${day}`,{
-// 	"method": "GET",
-// 	"headers": {
-// 		"x-rapidapi-host": "v3.football.api-sports.io",
-// 		"x-rapidapi-key": "e80663b34efa21c93f4b9507cc1d5aba"
-// 	}
-// }).then(response => response.json())
-// .then(data => console.log(data))
 
 //fetching todays fixtures on page loading
 function fetchFixtures(){
@@ -71,7 +64,6 @@ function fetchFixtures(){
 		"method": "GET",
 		"headers": {
 			"x-rapidapi-host": "v3.football.api-sports.io",
-			// "x-rapidapi-key": "e80663b34efa21c93f4b9507cc1d5aba"
 			"x-rapidapi-key": `${myKey}`
 		}
 	})
@@ -113,12 +105,13 @@ function fetchFixtures(){
 	.catch(err => {
 		console.log(err);
 		loaded();
-		gamesContainer.innerHTML = '<h2 style="text-align: center; margin: 5rem auto"> Ooops! Looks like we hit our daily limit <br> Try again tomorrow. <br> Sorry! </h2>';
-		adContainer.hidden = true;
+		gamesContainer.innerHTML = '<h2 style="text-align: center; margin: 5rem auto"> Ooops! Looks like we hit our daily limit (see the bottom of the page)<br> Try again tomorrow. <br> Sorry! </h2>';
+		adContainer.style.display = 'none';
 	});
 }
 
 fetchFixtures();
+
 let fixtureID;
 		
 //head to head tips
@@ -137,7 +130,6 @@ function getTip( home, away ){
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "v3.football.api-sports.io",
-		// "x-rapidapi-key": "e80663b34efa21c93f4b9507cc1d5aba"
 		"x-rapidapi-key": `${myKey}`
 	}
 	})
@@ -207,28 +199,32 @@ function getTip( home, away ){
 		
 		scoreSpan.textContent = scoreTip;
 		goalSpan.textContent =  ggTip + goalTip;
+		AIAdvice.textContent = '';
 
 		scoreSpan.classList.remove('calculating');
 		goalSpan.classList.remove('calculating');
 	})
-	.then( () =>{ predictionMatch(fixtureID) } )
 	.catch(err => {
 		console.log(err);
 	})
 }
 
-function predictionMatch(id){
-	fetch(`https://v3.football.api-sports.io/predictions?fixture=${id}`, {
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "v3.football.api-sports.io",
-		// "x-rapidapi-key": "e80663b34efa21c93f4b9507cc1d5aba"
-		"x-rapidapi-key": `${myKey}`
-	}
-	})
-	.then(response => response.json())
-	.then( data => console.log(data.response[0].predictions))
+function aiPrediction(){
+		fetch(`https://v3.football.api-sports.io/predictions?fixture=${fixtureID}`, {
+		"method": "GET",
+		"headers": {
+			"x-rapidapi-host": "v3.football.api-sports.io",
+			"x-rapidapi-key": `${myKey}`
+		}
+		})
+		.then(response => response.json())
+		.then( data => AIAdvice.textContent = data.response[0].predictions.advice)
+		.catch(err => {
+			console.log(err);
+		})
 }
+
+AIButton.addEventListener('click', aiPrediction);
 
 // to top handler
 window.addEventListener('scroll', () => {

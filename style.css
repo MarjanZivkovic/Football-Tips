@@ -132,8 +132,9 @@ ul{
 .tips-container{
     text-align: center;
     position: fixed;
-    top: 15%;
+    top: 10%;
     right: 10%;
+    max-width: 12rem;
 }
 .tips-flex{
     display: flex;
@@ -152,6 +153,23 @@ ul{
 }
 .score-tip.calculating, .goal-tip.calculating{
     background-color: rgba(102, 102, 102, 0.5);
+}
+.ai-advice-container{
+    font-size: 1rem;
+    margin: 0.5rem 0 0.5rem 0.5rem;
+}
+#ai-button{
+    box-shadow: 0 2px 0 rgba(102, 102, 102, 0.5);
+    border: 1px solid rgba(102, 102, 102, 0.5);
+    border-radius: 5px;
+    padding: 0.25rem 0.5rem;
+    margin-bottom: 5px;
+    font-family: inherit;
+    cursor: pointer;
+}
+#ai-button:active{
+    transform: translateY(2px);
+    box-shadow: 0 0 0 transparent;
 }
 /* Loader */
 .loader-container{
