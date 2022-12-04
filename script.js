@@ -71,7 +71,8 @@ function fetchFixtures(){
 		"method": "GET",
 		"headers": {
 			"x-rapidapi-host": "v3.football.api-sports.io",
-			"x-rapidapi-key": "e80663b34efa21c93f4b9507cc1d5aba"
+			// "x-rapidapi-key": "e80663b34efa21c93f4b9507cc1d5aba"
+			"x-rapidapi-key": `${myKey}`
 		}
 	})
 	.then(response => response.json())
@@ -136,7 +137,8 @@ function getTip( home, away ){
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "v3.football.api-sports.io",
-		"x-rapidapi-key": "e80663b34efa21c93f4b9507cc1d5aba"
+		// "x-rapidapi-key": "e80663b34efa21c93f4b9507cc1d5aba"
+		"x-rapidapi-key": `${myKey}`
 	}
 	})
 	.then(response => response.json())
@@ -220,11 +222,12 @@ function predictionMatch(id){
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "v3.football.api-sports.io",
-		"x-rapidapi-key": "e80663b34efa21c93f4b9507cc1d5aba"
+		// "x-rapidapi-key": "e80663b34efa21c93f4b9507cc1d5aba"
+		"x-rapidapi-key": `${myKey}`
 	}
 	})
 	.then(response => response.json())
-	.then( data => console.log(data.response))
+	.then( data => console.log(data.response[0].predictions))
 }
 
 // to top handler
