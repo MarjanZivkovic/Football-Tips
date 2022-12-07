@@ -19,6 +19,7 @@
     </header>
     <!-- Pop-up window -->
     <article class="pop-up-container" id="pop-up">
+        <div class="pop-up-blur"></div>
         <div class="pop-up">
             <h2>Welcome to Football Tips App!</h2>
             <p>We did our best to provide you with the quickest, smartest football tips.</p>
@@ -98,7 +99,7 @@
                     Goals: <span class="goal-tip">&nbsp;</span>
                 </div>
             </div>
-            <div class="ai-advice-container"> <button id="ai-button">AI tip:</button><span class="ai-advice">&nbsp;</span></div>
+            <div class="ai-advice-container"> <button id="ai-button" disabled>AI tip:</button><span class="ai-advice">&nbsp;</span></div>
         </div>
     </aside>
     <!-- Advertisements -->
@@ -115,7 +116,14 @@
         <div class="loader"></div>
     </div>
     <!-- Games Fetched-->
-    <main class="games-container"></main>
+    <main class="games-container">
+        <div class="no-hits" hidden>
+            <div>
+                <h2>No hits!</h2>
+                <h3>No matches today for the entered league/country.</h3>
+            </div>
+        </div>
+    </main>
     <!-- Legend -->
     <section class="game legend">
         <h3>Legend:</h3>

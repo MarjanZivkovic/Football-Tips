@@ -59,16 +59,15 @@ ul{
 /* Pop up window */
 #pop-up{
     display: none;
+    transition: all 3s ease-in;
 }
 .pop-up-container{
     opacity: 0;
-    transition: all 3s ease-in;
     position: fixed;
     top: 0;
     left: 0;
     min-height: 100vh;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
     justify-content: center;
     align-items: center;
     z-index: 10;
@@ -84,10 +83,21 @@ ul{
     border-image-source: linear-gradient(-20deg, #5a4280 0%, #e9defa 100%);
     border-image-slice: 0.5;
     border-radius: 1rem;
+    z-index: 2;
 }
 .pop-up p{
     text-align: justify;
     background-color: #fff;
+}
+.pop-up-blur{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(233, 222, 250, 0.9);
+    background-color: rgba(251, 252, 219, 0.9);
+    filter: blur(3rem);
 }
 /* Instruction page */
 .instruction-page{
@@ -135,6 +145,7 @@ ul{
     top: 10%;
     right: 10%;
     max-width: 12rem;
+    z-index: 2;
 }
 .tips-flex{
     display: flex;
@@ -166,6 +177,9 @@ ul{
     margin-bottom: 5px;
     font-family: inherit;
     cursor: pointer;
+}
+#ai-button:hover{
+    filter: brightness(0.8);
 }
 #ai-button:active{
     transform: translateY(2px);
@@ -255,6 +269,11 @@ ul{
     max-width: 680px;
     margin: 3rem auto;
 }
+.no-hits{
+    min-height: 100vh;
+    text-align: center;
+    margin-top: 5rem;
+}
 .game-container{
     display: grid;
     grid-template-columns: 1fr 9fr 1fr;
@@ -324,7 +343,7 @@ ul{
     right: 0;
     bottom: 0;
     width: 18rem;
-    height: 25rem;
+    height: 20rem;
     z-index: 2;
 }
 /* Go top top */

@@ -1,6 +1,9 @@
 const searchGames = document.querySelector('.search-games');
 const loader = document.querySelector('.loader-container');
 const gamesContainer = document.querySelector('.games-container');
+const noHits = document.querySelector('.no-hits');
+const invisibleGames = document.querySelectorAll('.game.none');
+const totalGames = document.querySelectorAll('.game');
 const scoreSpan = document.querySelector('.score-tip');
 const goalSpan = document.querySelector('.goal-tip');
 const AIButton = document.querySelector('#ai-button');
@@ -70,6 +73,7 @@ function fetchFixtures(){
 	.then(response => response.json())
 	.then (data => data.response.forEach( el => {
 				if ( el.fixture.status.short === 'NS' ||  el.fixture.status.short === 'TBD' || el.fixture.status.short === '1H' || el.fixture.status.short === 'HT' || el.fixture.status.short === '2H' || el.fixture.status.short === 'ET' || el.fixture.status.short === 'P' || el.fixture.status.short === 'INT'){
+					// creating and appending games
 					const game = document.createElement('div');
 					game.classList.add('game');
 					game.innerHTML = `
@@ -84,12 +88,17 @@ function fetchFixtures(){
 						</div>			
 						`;
 					gamesContainer.appendChild(game);
+
+					// adding active class
+					game.addEventListener('click', () =>{
+						game.style.border = '2px solid #5a4280';
+					})
 		}
 	})).then( () =>{ loaded() })
 	.then( () =>{
 		//filter leagues
 		const leagues = document.querySelectorAll('.league');
-	
+		
 		function filterLeagues( searchedLeague ){
 			leagues.forEach( league => {
 				if( league.textContent.toLowerCase().includes( searchedLeague.toLowerCase() ) ){
@@ -100,7 +109,16 @@ function fetchFixtures(){
 			} )
 		}
 	
-		searchGames.addEventListener('input', (e) => filterLeagues(e.target.value));
+		searchGames.addEventListener('input', (e) => {
+			filterLeagues(e.target.value);
+			
+			if( invisibleGames.length ===  totalGames.length){
+				noHits.hidden = false;
+			} else {
+				noHits.hidden = true;
+			} 
+			//SOLVE THIS
+		})
 	})
 	.catch(err => {
 		console.log(err);
@@ -135,6 +153,7 @@ function getTip( home, away ){
 	})
 	.then(response => response.json())
 	.then( data => data.response.forEach( match =>{
+		AIButton.disabled = false
 		fixtureID = match.fixture.id
 		if( match.teams.home.id === home ){
 			if ( (match.goals.home + match.goals.away) > 2  ){
@@ -209,6 +228,7 @@ function getTip( home, away ){
 	})
 }
 
+//AI Tips
 function aiPrediction(){
 		fetch(`https://v3.football.api-sports.io/predictions?fixture=${fixtureID}`, {
 		"method": "GET",
@@ -218,7 +238,10 @@ function aiPrediction(){
 		}
 		})
 		.then(response => response.json())
-		.then( data => AIAdvice.textContent = data.response[0].predictions.advice)
+		.then( data => {
+			AIAdvice.textContent = data.response[0].predictions.advice
+			AIButton.disabled = true
+		})  
 		.catch(err => {
 			console.log(err);
 		})
