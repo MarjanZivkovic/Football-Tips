@@ -377,6 +377,12 @@ footer p a:hover{
     text-decoration: none;
     color: #3c1e69;
 }
+.footer-disclaimer{
+    font-size: 0.95rem;
+    line-height: 1.2rem;
+    max-width: 680px;
+    margin: 1rem auto;
+}
 
 /* responsive design */
 
