@@ -426,6 +426,12 @@ footer p a:hover{
         background: url(./img/ball.svg) no-repeat 50% bottom / contain;
         background-attachment: fixed;
     }
+    .no-hits{
+        min-height: auto;
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 1rem;
+    }
     .go-to-top{
         right: 1rem;
     }

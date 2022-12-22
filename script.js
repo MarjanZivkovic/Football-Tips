@@ -2,8 +2,6 @@ const searchGames = document.querySelector('.search-games');
 const loader = document.querySelector('.loader-container');
 const gamesContainer = document.querySelector('.games-container');
 const noHits = document.querySelector('.no-hits');
-const invisibleGames = document.querySelectorAll('.game.none');
-const totalGames = document.querySelectorAll('.game');
 const scoreSpan = document.querySelector('.score-tip');
 const goalSpan = document.querySelector('.goal-tip');
 const AIButton = document.querySelector('#ai-button');
@@ -103,6 +101,12 @@ function fetchFixtures(){
 			leagues.forEach( league => {
 				if( league.textContent.toLowerCase().includes( searchedLeague.toLowerCase() ) ){
 					league.parentNode.parentNode.parentNode.classList.remove('none');
+					// if( invisibleGames.length ===  totalGames.length){
+					// 	noHits.hidden = false;
+					// } else {
+					// 	noHits.hidden = true;
+					// } 
+					
 				} else {
 					league.parentNode.parentNode.parentNode.classList.add('none');
 				}
@@ -111,13 +115,17 @@ function fetchFixtures(){
 	
 		searchGames.addEventListener('input', (e) => {
 			filterLeagues(e.target.value);
-			
-			if( invisibleGames.length ===  totalGames.length){
+			let noHitsArr = [];
+			for (let i = 0; i < gamesContainer.children.length; i ++){
+				if ( gamesContainer.children[i].classList.contains('none')){
+					noHitsArr.push('no');
+				}
+			}
+			if(noHitsArr.length === gamesContainer.children.length - 1){
 				noHits.hidden = false;
 			} else {
-				noHits.hidden = true;
-			} 
-			//SOLVE THIS
+					noHits.hidden = true;
+				}
 		})
 	})
 	.catch(err => {
