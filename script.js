@@ -101,12 +101,6 @@ function fetchFixtures(){
 			leagues.forEach( league => {
 				if( league.textContent.toLowerCase().includes( searchedLeague.toLowerCase() ) ){
 					league.parentNode.parentNode.parentNode.classList.remove('none');
-					// if( invisibleGames.length ===  totalGames.length){
-					// 	noHits.hidden = false;
-					// } else {
-					// 	noHits.hidden = true;
-					// } 
-					
 				} else {
 					league.parentNode.parentNode.parentNode.classList.add('none');
 				}
@@ -124,8 +118,8 @@ function fetchFixtures(){
 			if(noHitsArr.length === gamesContainer.children.length - 1){
 				noHits.hidden = false;
 			} else {
-					noHits.hidden = true;
-				}
+				noHits.hidden = true;
+			}
 		})
 	})
 	.catch(err => {
@@ -140,7 +134,7 @@ fetchFixtures();
 
 let fixtureID;
 		
-//head to head tips
+//Our Tips
 function getTip( home, away ){
 	const scoreArr = [];
 	const goalArr = [];
