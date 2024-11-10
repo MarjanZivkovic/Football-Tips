@@ -1,7 +1,6 @@
 const searchGames = document.querySelector(".search-games");
 const loader = document.querySelector(".loader-container");
 const gamesContainer = document.querySelector(".games-container");
-const games = document.querySelectorAll(".game");
 const noHits = document.querySelector(".no-hits");
 const scoreSpan = document.querySelector(".score-tip");
 const goalSpan = document.querySelector(".goals-tip");
@@ -62,13 +61,6 @@ backHomeBtn.addEventListener("click", () => {
   document.body.style.overflow = "auto";
 });
 
-// add active classses handler
-// function addActive() {
-//   games.forEach((game) => {
-//     game.classList.remove("active");
-//   });
-// }
-
 //fetching todays fixtures on page loading
 function fetchFixtures() {
   loading();
@@ -119,15 +111,10 @@ function fetchFixtures() {
 							</div>
 							<button onclick='getTip(${el.teams.home.id}, ${
             el.teams.away.id
-          })'>Our Tips</button>
+          }); setActive(this)'>Our Tips</button>
 						</div>			
 						`;
           gamesContainer.appendChild(game);
-
-          // adding active class
-          game.addEventListener("click", () => {
-            game.classList.add("active");
-          });
         }
       })
     )
@@ -178,7 +165,18 @@ function fetchFixtures() {
 
 fetchFixtures();
 
-let fixtureID;
+// let fixtureID;
+
+// add active classses handler
+function setActive(button) {
+  const games = document.querySelectorAll(".game");
+  games.forEach((game) => game.classList.remove("active"));
+
+  const game = button.closest(".game");
+  if (game) {
+    game.classList.add("active");
+  }
+}
 
 //Our Tips
 function getTip(home, away) {
@@ -211,7 +209,7 @@ function getTip(home, away) {
     .then((data) =>
       data.response.forEach((match) => {
         // AIButton.disabled = false;
-        fixtureID = match.fixture.id;
+        // fixtureID = match.fixture.id;
 
         const homeGoals = match.goals.home;
         const awayGoals = match.goals.away;

@@ -169,7 +169,7 @@ ul {
   text-align: center;
 }
 .goals-tip {
-  margin-left: 3.25rem;
+  margin-left: 3rem;
 }
 .score-tip.calculating,
 .goal-tip.calculating {
@@ -326,6 +326,7 @@ ul {
 }
 .game.active {
   border: 2px solid #5a4280;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
 }
 .game .teams > div {
   display: flex;
