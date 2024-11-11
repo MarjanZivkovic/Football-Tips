@@ -9,8 +9,6 @@ const scorePercentageSpan = document.querySelector(".score-perc");
 const ggPercentageSpan = document.querySelector(".gg-perc");
 const goalsPercentageSpan = document.querySelector(".goals-perc");
 const sampleSize = document.querySelector(".sample-size");
-// const AIButton = document.querySelector("#ai-button");
-// const AIAdvice = document.querySelector(".ai-advice");
 const instructionPage = document.querySelector(".instruction-page");
 const instructionBtn = document.querySelector("#instruction");
 const backHomeBtn = document.querySelector("#back-home");
@@ -165,8 +163,6 @@ function fetchFixtures() {
 
 fetchFixtures();
 
-// let fixtureID;
-
 // add active classses handler
 function setActive(button) {
   const games = document.querySelectorAll(".game");
@@ -208,19 +204,11 @@ function getTip(home, away) {
     .then((response) => response.json())
     .then((data) =>
       data.response.forEach((match) => {
-        // AIButton.disabled = false;
-        // fixtureID = match.fixture.id;
-
         const homeGoals = match.goals.home;
         const awayGoals = match.goals.away;
         const totalGoals = homeGoals + awayGoals;
 
         if (match.teams.home.id === home) {
-          // if (match.goals.home + match.goals.away > 2) {
-          //   goalArr.push("3+");
-          // } else if (match.goals.home + match.goals.away <= 2) {
-          //   goalArr.push("0-2");
-          // }
           if (totalGoals < 2) {
             goalArr.push("0-2");
           } else if (totalGoals === 2) {
@@ -230,17 +218,6 @@ function getTip(home, away) {
           } else {
             goalArr.push("4+");
           }
-
-          // if (match.teams.home.winner) {
-          //   scoreArr.push("1");
-          // } else if (match.teams.away.winner) {
-          //   scoreArr.push("2");
-          // } else if (
-          //   match.teams.home.winner === null ||
-          //   match.teams.away.winner === null
-          // ) {
-          //   scoreArr.push("x");
-          // }
 
           if (homeGoals > awayGoals) {
             scoreArr.push("1");
@@ -255,11 +232,6 @@ function getTip(home, away) {
           } else {
             ggArr.push("ngg");
           }
-          // if (match.goals.home > 0 && match.goals.away > 0) {
-          //   ggArr.push("gg");
-          // } else {
-          //   ggArr.push("ngg");
-          // }
         }
       })
     )
@@ -381,19 +353,6 @@ function getTip(home, away) {
           goalTip = "-";
           goalPercentage = "";
         }
-        // if (
-        //   goalArr.filter((x) => x === "3+").length > goalArr.length / 2 &&
-        //   goalArr.indexOf("3+") === 0
-        // ) {
-        //   goalTip = "3+";
-        // } else if (
-        //   goalArr.filter((x) => x === "0-2").length > goalArr.length / 2 &&
-        //   goalArr.indexOf("0-2") === 0
-        // ) {
-        //   goalTip = "0-2";
-        // } else {
-        //   goalTip = "-";
-        // }
       } else {
         goalTip = "-";
         goalPercentage = "";
@@ -439,7 +398,6 @@ function getTip(home, away) {
       ggPercentageSpan.textContent = ggPercentage;
 
       sampleSize.textContent = sampleQuality;
-      // AIAdvice.textContent = "";
 
       scoreSpan.classList.remove("calculating");
       goalSpan.classList.remove("calculating");
@@ -449,27 +407,6 @@ function getTip(home, away) {
       console.log(err);
     });
 }
-
-//AI Tips
-// function aiPrediction() {
-//   fetch(`https://v3.football.api-sports.io/predictions?fixture=${fixtureID}`, {
-//     method: "GET",
-//     headers: {
-//       "x-rapidapi-host": "v3.football.api-sports.io",
-//       "x-rapidapi-key": `${myKey}`,
-//     },
-//   })
-//     .then((response) => response.json())
-//     .then((data) => {
-//       AIAdvice.textContent = data.response[0].predictions.advice;
-//       AIButton.disabled = true;
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// }
-
-// AIButton.addEventListener("click", aiPrediction);
 
 // to top handler
 window.addEventListener("scroll", () => {

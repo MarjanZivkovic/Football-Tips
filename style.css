@@ -26,6 +26,7 @@ ul {
 .none {
   display: none;
 }
+
 /* Instruction button and search field */
 .search-games,
 .instruction {
@@ -57,7 +58,8 @@ ul {
   outline: none;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
-/* Pop up window */
+
+/* Pop-up window */
 #pop-up {
   display: none;
   transition: all 3s ease-in;
@@ -100,6 +102,7 @@ ul {
   background-color: rgba(251, 252, 219, 0.9);
   filter: blur(3rem);
 }
+
 /* Instruction page */
 .instruction-page {
   background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
@@ -139,24 +142,17 @@ ul {
 .instruction-page span.red {
   color: rgb(199, 76, 76);
 }
+
 /* Tips */
 .tips-container {
-  /* text-align: center; */
   position: fixed;
   top: 5%;
   right: 10%;
-  /* max-width: 12rem; */
   z-index: 2;
 }
 .tips-container h3 {
   text-align: center;
 }
-/* .tips-flex {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-} */
 .score-tip,
 .goal-tip {
   display: inline-block;
@@ -189,26 +185,7 @@ ul {
 .sample-size {
   font-weight: bold;
 }
-/* .ai-advice-container {
-  font-size: 1rem;
-  margin: 0.5rem 0 0.5rem 0.5rem;
-}
-#ai-button {
-  box-shadow: 0 2px 0 rgba(102, 102, 102, 0.5);
-  border: 1px solid rgba(102, 102, 102, 0.5);
-  border-radius: 5px;
-  padding: 0.25rem 0.5rem;
-  margin-bottom: 5px;
-  font-family: inherit;
-  cursor: pointer;
-}
-#ai-button:hover {
-  filter: brightness(0.8);
-}
-#ai-button:active {
-  transform: translateY(2px);
-  box-shadow: 0 0 0 transparent;
-} */
+
 /* Loader */
 .loader-container {
   display: flex;
@@ -261,6 +238,7 @@ ul {
     box-shadow: 0 2.5em 0 0;
   }
 }
+
 /* Ads */
 .ad-container {
   position: absolute;
@@ -296,6 +274,7 @@ ul {
     opacity: 0;
   }
 }
+
 /* Games */
 .games-container {
   max-width: 680px;
@@ -361,6 +340,7 @@ ul {
 .game button:hover {
   filter: brightness(0.9);
 }
+
 /* Legend */
 .game.legend {
   max-width: 680px;
@@ -372,6 +352,7 @@ ul {
 .legend {
   font-size: 1rem;
 }
+
 /* Ball */
 .ball {
   background: url(./img/ball.svg) no-repeat bottom right;
@@ -382,6 +363,7 @@ ul {
   height: 20rem;
   z-index: 2;
 }
+
 /* Go top top */
 .go-to-top {
   user-select: none;
@@ -397,6 +379,7 @@ ul {
   color: #5a4280;
   font-weight: bold;
 }
+
 /* Footer */
 footer {
   padding: 3rem 1rem;
@@ -440,9 +423,6 @@ footer p a:hover {
     padding-bottom: 1rem;
   }
   .tips-flex {
-    /* display: flex;
-    flex-direction: row;
-    justify-content: space-between; */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     justify-content: space-between;
